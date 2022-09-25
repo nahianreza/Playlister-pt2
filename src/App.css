@@ -19,7 +19,7 @@ body {
 
 #root {
   background-color: var(--swatch-primary);
-  font-family: serif;
+  font-family: 'Tangerine';
   position: absolute;
   width: 80%;
   left: 10%;
@@ -88,10 +88,12 @@ body {
 #playlist-cards {
   grid-column: 2 / 3;
   grid-row: 3 / 4;
+
   display: flex;
   flex-direction: column;
   overflow: scroll;
   background-color: var(--swatch-accent);
+  
 }
 
 #playlister-statusbar {
@@ -106,9 +108,10 @@ body {
 
 #add-list-button {
   float:left;
+  font-size: 30px;
 }
 
-.list-card, .selected-list-card, .unselected-list-card {
+.list-card, .selected-list-card, .unselected-list-card, .playlister-song {
   font-size: 18pt;
   margin: 10px;
   padding: 20px;
@@ -120,6 +123,12 @@ body {
   background-color: var(--swatch-contrast);
   color:white;
 }
+.playlister-song:hover{
+  cursor: pointer;
+  background-color: var(--swatch-contrast);
+  color:white;
+}
+
 
 .selected-list-card {
   background-color: var(--swatch-accent);
@@ -130,9 +139,12 @@ body {
   background-color: var(--swatch-complement);
 }
 
-.list-card-button {
+.list-card-button, .song-card-button {
   float:right;
   font-size:18pt;
+}
+#add-song-button, #undo-button, #redo-button, #close-button{
+  font-size: 50px;
 }
 
 .playlister-button, .playlister-button-disabled {
@@ -154,11 +166,15 @@ body {
 }
 
 .playlister-song, .playlister-song-dragged-to { 
-  display:flex;
-  align-items: center;
-  font-size: 24pt;
-  height:20%;
+  font-size: 32pt;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 25px;
 }
+.playlister-song{
+  background-color: var(--swatch-complement);
+}
+.song
 
 input {
   font-size:20pt;
@@ -220,7 +236,7 @@ input {
   grid-template-columns: 30% 65%;
   grid-template-rows: 33% 33% 33%;
   gap: 10px 20px;
-  font-size: 48pt;
+  font-size: 32pt;
 }
 
 span {

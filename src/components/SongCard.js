@@ -60,6 +60,7 @@ export default class SongCard extends React.Component {
 
     render() {
         const { song } = this.props;
+        <a></a>
         let num = this.getItemNum();
         console.log("num: " + num);
         let itemClass = "playlister-song";
@@ -77,7 +78,12 @@ export default class SongCard extends React.Component {
                 onDrop={this.handleDrop}
                 draggable="true"
             >
-                {song.title} by {song.artist}
+                {num}. <a href={"https://youtube.com/watch?v="+song.youTubeId} >{song.title} by {song.artist}</a>
+                <input
+                        type="button"
+                        id={"delete-song-" + num}
+                        className="song-card-button"
+                        value={"X"} />
             </div>
         )
     }

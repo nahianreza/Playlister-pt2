@@ -18,7 +18,7 @@ export default class DeleteListModal extends Component {
                         </div>
                         <div class="modal-center">
                             <div class="modal-center-content">
-                                Are you sure you wish to permanently delete the {name} playlist?
+                                Are you sure you wish to permanently delete the <span>{name}</span> playlist?
                             </div>
                         </div>
                         <div class="modal-south">
