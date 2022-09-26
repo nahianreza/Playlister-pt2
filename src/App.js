@@ -7,6 +7,8 @@ import jsTPS from './common/jsTPS.js';
 
 // OUR TRANSACTIONS
 import MoveSong_Transaction from './transactions/MoveSong_Transaction.js';
+import AddSong_Transaction from './transactions/AddSong_Transaction';
+import DeleteSong_Transaction from './transactions/DeleteSong_Transaction';
 
 // THESE REACT COMPONENTS ARE MODALS
 import DeleteListModal from './components/DeleteListModal.js';
@@ -19,7 +21,7 @@ import PlaylistCards from './components/PlaylistCards.js';
 import SidebarHeading from './components/SidebarHeading.js';
 import SidebarList from './components/SidebarList.js';
 import Statusbar from './components/Statusbar.js';
-import AddSong_Transaction from './transactions/AddSong_Transaction';
+
 
 
 class App extends React.Component {
@@ -99,6 +101,12 @@ class App extends React.Component {
 
 
     }
+    createAnotherSong(index,song){
+        let list = this.state.currentList;
+
+        list.songs.splice(index, 0, song);
+        this.setStateWithUpdatedList(list);
+    }
     // THIS FUNCTION BEGINS THE PROCESS OF DELETING A LIST.
     deleteList = (key) => {
         // IF IT IS THE CURRENT LIST, CHANGE THAT
@@ -165,15 +173,6 @@ class App extends React.Component {
         let modal = document.getElementById("delete-song-modal");
         modal.classList.remove("is-visible");
     }
-    // deleteSong =(index) => {
-    //     let songList = this.state.currentList;
-    //     songList.songs.splice(index,1);
-    //     this.setStateWithUpdatedList(songList);
-
-    // }
-    // deleteMarkedSong = () => {
-    //     this.deleteSong(this.state.songIndex -1)
-    // }
     renameList = (key, newName) => {
         let newKeyNamePairs = [...this.state.sessionData.keyNamePairs];
         // NOW GO THROUGH THE ARRAY AND FIND THE ONE TO RENAME
@@ -279,6 +278,14 @@ class App extends React.Component {
         let transaction = new AddSong_Transaction(this);
         this.tps.addTransaction(transaction);
     }
+    DeleteSongTransaction = () => {
+        let song = this.state.songKeyPairMarkedForDeletion;
+        let index = this.state.currentList.songs.indexOf(song);
+        let transaction = new DeleteSong_Transaction(this,index,song);
+        this.tps.addTransaction(transaction);
+        this.hideDeleteSongModal();
+        
+    }
     // THIS FUNCTION BEGINS THE PROCESS OF PERFORMING AN UNDO
     undo = () => {
         if (this.tps.hasTransactionToUndo()) {
@@ -368,7 +375,7 @@ class App extends React.Component {
                  <DeleteSongModal
                     songKeyPair={this.state.songKeyPairMarkedForDeletion}
                     hideDeleteSongModalCallback={this.hideDeleteSongModal}
-                    deleteSongCallback={this.deleteMarkedSong}
+                    deleteSongCallback={this.DeleteSongTransaction}
                 />
 
             </div>
