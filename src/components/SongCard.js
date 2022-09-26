@@ -53,6 +53,10 @@ export default class SongCard extends React.Component {
         // ASK THE MODEL TO MOVE THE DATA
         this.props.moveCallback(sourceId, targetId);
     }
+    handleDeleteSong = (event) => {
+        event.stopPropagation();
+        this.props.deleteSongCallback(this.props.song);
+    }
 
     getItemNum = () => {
         return this.props.id.substring("playlist-song-".length);
@@ -60,7 +64,6 @@ export default class SongCard extends React.Component {
 
     render() {
         const { song } = this.props;
-        <a></a>
         let num = this.getItemNum();
         console.log("num: " + num);
         let itemClass = "playlister-song";
@@ -83,6 +86,7 @@ export default class SongCard extends React.Component {
                         type="button"
                         id={"delete-song-" + num}
                         className="song-card-button"
+                        onClick={this.handleDeleteSong}
                         value={"X"} />
             </div>
         )
