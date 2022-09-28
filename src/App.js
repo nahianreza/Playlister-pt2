@@ -376,7 +376,25 @@ class App extends React.Component {
         let modal = document.getElementById("edit-song-modal");
         modal.classList.remove("is-visible"); 
     }
+    shortcut() {
+        function KeyPress(event, app) {
+            if(event.ctrlKey && !app.state.modalOpen)
+            {
+                if(event.key === "z") {
+                    app.undo();
+                    app.setStateWithUpdatedList(app.state.currentList);
+                }
+                else if(event.key === 'y') {
+                    app.redo();
+                    app.setStateWithUpdatedList(app.state.currentList);
+                }
+            }
+        }
+
+        document.onkeydown = (e) => KeyPress(e, this);
+    }
     render() {
+        this.shortcut();
         let canAddSong = this.state.currentList !== null;
         let canUndo = this.tps.hasTransactionToUndo();
         let canRedo = this.tps.hasTransactionToRedo();
