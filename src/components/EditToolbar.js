@@ -3,7 +3,7 @@ import React from "react";
 export default class EditToolbar extends React.Component {
     render() {
         const { canAddSong, canUndo, canRedo, canClose, 
-                undoCallback, redoCallback, closeCallback, addSongCallback} = this.props;
+                undoCallback, redoCallback, closeCallback, addSongCallback, isModal} = this.props;
         let addSongClass = "toolbar-button";
         let undoClass = "toolbar-button";
         let redoClass = "toolbar-button";
@@ -12,6 +12,7 @@ export default class EditToolbar extends React.Component {
         if (canUndo) undoClass += " disabled";
         if (canRedo) redoClass += " disabled";
         if (canClose) closeClass += " disabled";
+        
         return (
             <div id="edit-toolbar">
             <input 
@@ -20,6 +21,7 @@ export default class EditToolbar extends React.Component {
                 value="+" 
                 className={addSongClass}
                 onClick={addSongCallback}
+                disabled={canAddSong ? true : false|| isModal}
             />
             <input 
                 type="button" 
@@ -27,6 +29,7 @@ export default class EditToolbar extends React.Component {
                 value="⟲" 
                 className={undoClass} 
                 onClick={undoCallback}
+                disabled={!canUndo || isModal || canAddSong}
             />
             <input 
                 type="button" 
@@ -34,6 +37,7 @@ export default class EditToolbar extends React.Component {
                 value="⟳" 
                 className={redoClass} 
                 onClick={redoCallback}
+                disabled={!canRedo || isModal || canAddSong}
             />
             <input 
                 type="button" 
@@ -41,6 +45,7 @@ export default class EditToolbar extends React.Component {
                 value="&#x2715;" 
                 className={closeClass} 
                 onClick={closeCallback}
+                disabled={!canClose || isModal}
             />
         </div>
         )

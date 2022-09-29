@@ -164,6 +164,10 @@ body {
   opacity: 0.25; 
   cursor: not-allowed;
 }
+#add-list-button :disabled{
+  opacity: 0.25; 
+  cursor: not-allowed;
+}
 
 .playlister-song, .playlister-song-dragged-to { 
   font-size: 32pt;
@@ -174,7 +178,7 @@ body {
 .playlister-song{
   background-color: var(--swatch-complement);
 }
-.song
+
 
 input {
   font-size:20pt;
